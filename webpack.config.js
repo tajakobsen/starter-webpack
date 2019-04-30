@@ -9,13 +9,11 @@ const isDev = env.dev;
 module.exports = {
     context: path.join(__dirname, '/src/main/resources/assets'),
     entry: {
-        'js/bundle': './js/main.js',
-        'styles/style1': './styles/main.less',
-        'styles/style2': './styles/main.sass',
+        bundle: './js/main.js',
     },
     output: {
         path: path.join(__dirname, '/build/resources/main/assets'),
-        filename: './[name].js',
+        filename: './js/[name].js',
     },
     resolve: {
         extensions: ['.js', '.less', '.sass', '.css'],
@@ -37,7 +35,7 @@ module.exports = {
                 ]
             },
             {
-                test: /\.sass$/,
+                test: /\.(sass|scss)$/,
                 use: [
                     {loader: MiniCssExtractPlugin.loader, options: {publicPath: '../', hmr: isDev}},
                     {loader: 'css-loader', options: {sourceMap: !isProd, importLoaders: 1}},
@@ -68,8 +66,8 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css',
+            filename: './styles/[name].css',
+            chunkFilename: './styles/[id].css',
         }),
     ],
     mode: env.type,

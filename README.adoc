@@ -54,15 +54,19 @@ src/
   resources/
    assets/
     js/
-      main.js <1>
+      example.js <1>
+      main.js <2>
     styles/
-      main.less <2>
-      main.sass <3>
+      main.less <3>
+      main.sass <4>
+      main.scss <5>
 ----
 
-<1> Entry point of your application. Will be transpiled to the `assets/js/bundle.js`.
-<2> Project styles in Less syntax. Will be transpiled to the `assets/styles/style1.css`.
-<3> Project styles in SASS syntax. Will be transpiled to the `assets/styles/style2.css`.
+<1> Import example, that is imorted in the `main.js`.
+<2> Entry point of your application. Will be transpiled to the `assets/js/bundle.js`.
+<3> Project styles in Less syntax.
+<4> Project styles in SASS syntax.
+<5> Project styles in SCSS syntax.
 
 
 == Building and Deploying
@@ -115,9 +119,9 @@ The JS code will be transpiled by the Babel, according to the https://github.com
 ```
 See the official Browserslist https://github.com/browserslist/browserslist#browserslist-[documentation], if you want to change the configuration.
 
-=== Less & Sass
+=== Less & Sass (Scss)
 
-The starter supports Less and Sass. But you probably won't be needing both of them. Just go to the `webpack.config.js`, drop the `entry` you don't need, rename the remaining one, and remove the obsolete rule from the `module.rules` array. Also, don't forget to remove the corresponding node modules with the npm from the `package.json` for Less (`npm r less less-loader`) or Sass (`npm r node-sass sass-loader`).
+The starter supports Less, Sass and Scss. But you probably won't be needing all of them. Just go to the `webpack.config.js`, drop the obsolete rule from the `module.rules` array and rename the remaining one. Also, don't forget to remove the corresponding node modules with the npm from the `package.json` for Less (`npm r less less-loader`) or Sass (`npm r node-sass sass-loader`).
 
 === Optimization
 
