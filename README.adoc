@@ -35,14 +35,16 @@ To setup a project locally, simply run the following command:
 
 ```bash
 ~ $ enonic project create
-... Answer wizard question and choose webpack starter
+```
+Complete the Wizard and make sure you choose *Webpack starter* from the list of starters
 
+```bash
 ~ $ cd <project-folder>
 ```
 
 NOTE: *Don't have the Enonic CLI?* Visit the https://developer.enonic.com/start[Getting started guide] to install it.
 
-== Porject structure
+== Project structure
 
 In the selected folder, you should now have a project structure, looking something like this:
 
