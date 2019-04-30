@@ -63,9 +63,7 @@ module.exports = {
             }),
         ],
         splitChunks: {
-            chunks: 'async',
             minSize: 30000,
-            minChunks: 1,
         },
     },
     plugins: [

@@ -1,0 +1,124 @@
+= Webpack Starter for Enonic XP
+:toc: right
+:experimental:
+
+This starter kit will set up a basic template for your new Enonic app, with support for the Webpack.
+
+NOTE: This starter requires Enonic XP 7.0.0 or later
+
+
+== Introduction
+
+Once initiated, you'll have the bare minimum needed to create a new Enonic
+application with Webpack. You'll have all the folders set up, and can get
+straight to creating what you're creating.
+
+The project will support:
+
+* Code minification;
+* Production and development environments;
+* SASS and Less support;
+* Transpilation with Babel.
+
+== Compatibility
+
+|===
+| Version | Min XP version
+
+|1.0.0	
+|7.0.0
+|===
+
+== Create project
+
+To setup a project locally, simply run the following command:
+
+```bash
+~ $ enonic project create
+... Answer wizard question and choose webpack starter
+
+~ $ cd <project-folder>
+```
+
+NOTE: *Don't have the Enonic CLI?* Visit the https://developer.enonic.com/start[Getting started guide] to install it.
+
+== Porject structure
+
+In the selected folder, you should now have a project structure, looking something like this:
+
+.Selected files from the project structure:
+[source,files]
+----
+src/
+ main/
+  resources/
+   assets/
+    js/
+      main.js <1>
+    styles/
+      main.less <2>
+      main.sass <3>
+----
+
+<1> Entry point of your application. Will be transpiled to the `assets/js/bundle.js`.
+<2> Project styles in Less syntax. Will be transpiled to the `assets/styles/style1.css`.
+<3> Project styles in SASS syntax. Will be transpiled to the `assets/styles/style2.css`.
+
+
+== Building and Deploying
+
+=== Deploying
+
+To build and deploy the app, run this command from your shell:
+
+```bash
+$ enonic project deploy
+```
+
+After accepting starting the sandbox, your brand new app should now be up and running on http://localhost:8080
+
+[NOTE]
+====
+To verify that your app started successfully, you should find an entry similar to this in the sandbox log:
+
+  2019-04-30 14:26:30,856 INFO ... Application [com.acme.example.webpack] installed successfully
+====
+
+=== Building with Gradle
+
+The project can also be built with Gradle wrapper. In this case, you can set the environment type by calling the build with the `env` parameter. This parameter can be either `prod` ("production"), or `dev` ("development"). If the environment is not set explicitly, the "production" will be used by default.
+
+Here is how you can run build in "development" mode:
+
+```bash
+$ gradlew build -Penv=dev
+```
+
+In the "production" mode, all your code is minimized, dead code is removed, and no mappings are available.
+
+
+== Customizing build
+
+=== Browserslist
+
+The JS code will be transpiled by the Babel, according to the https://github.com/browserslist/browserslist[Browserslist] environment settings. The CSS will be optimized, and all vendor prefixes will be automatically added, according to the supported browsers from the Browserslist configuration. By default, the starter extends the Enonic Browserslist configuration:
+
+.package.json
+```json
+{
+  ...
+  "browserslist": [
+    "extends browserslist-config-enonic"
+  ],
+  ...
+}
+```
+See the official Browserslist https://github.com/browserslist/browserslist#browserslist-[documentation], if you want to change the configuration.
+
+=== Less & Sass
+
+The starter supports Less and Sass. But you probably won't be needing both of them. Just go to the `webpack.config.js`, drop the `entry` you don't need, rename the remaining one, and remove the obsolete rule from the `module.rules` array. Also, don't forget to remove the corresponding node modules with the npm from the `package.json` for Less (`npm r less less-loader`) or Sass (`npm r node-sass sass-loader`).
+
+=== Optimization
+
+In the "production" mode, the Webpack will do multiple default https://github.com/webpack-contrib/terser-webpack-plugin#terseroptions[optimizations] to the resulting JS, except removing the console methods calls from the code, because the corresponding options (`drop_console`) is set to `false`.
