@@ -17,16 +17,6 @@ The project will support:
 * SASS and Less support;
 * Transpilation with Babel.
 
-== Compatibility
-
-[width="50%",options="header"]
-|===
-| Version | Min XP version
-
-|1.0.0	
-|7.0.0
-|===
-
 == Create a project
 
 To setup a project locally, simply run the following command:

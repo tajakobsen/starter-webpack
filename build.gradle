@@ -59,6 +59,8 @@ task webpack( type: NodeTask, dependsOn: npmInstall ) {
 }
 
 processResources {
+    include '**/*'
+    exclude '**/.gitkeep'
     exclude 'assets/js/**/*.js'
     include 'assets/js/bundle.js'
     exclude 'assets/styles/**/*.sass'
