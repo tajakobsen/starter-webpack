@@ -2,6 +2,6 @@ import '../styles/main.less';
 import '../styles/main.sass';
 import '../styles/main.scss';
 
-import example from './example';
+import ts_example from './example';
 
-example();
+ts_example();

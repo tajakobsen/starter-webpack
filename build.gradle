@@ -61,7 +61,7 @@ processResources {
     include '**/*'
     exclude '**/.gitkeep'
     exclude 'assets/js/**/*.js'
-    exclude 'assets/js/**/*.ts'
+    exclude 'assets/ts/**/*.ts'
     include 'assets/js/bundle.js'
     exclude 'assets/styles/**/*.less'
     exclude 'assets/styles/**/*.sass'

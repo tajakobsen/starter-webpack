@@ -1,4 +1,4 @@
 export default function example(): void {
-  const msg: string = 'Webpack starter.';
+  const msg: string = 'Hello from Typescript code.';
   console.log(msg);
 }

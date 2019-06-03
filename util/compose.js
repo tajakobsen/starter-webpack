@@ -26,6 +26,8 @@ const setByPath = R.curry((objPath, data, object) =>
 
 // setEntry :: Object -> Object
 const setEntry = setByPath('entry.bundle');
+// addEntry :: Object -> Object -> Object
+const addEntry = (bundleName, data) => setByPath('entry.' + bundleName, data);
 // addRule :: Object -> Object -> Object
 const addRule = appendToArrayByPath('module.rules');
 // addPlugin :: Object -> Object -> Object
@@ -36,12 +38,16 @@ const addPlugins = list => R.map(addPlugin, list);
 const prependExtensions = concatArraysByPath('resolve.extensions');
 // appendExtensions :: Object -> Object
 const appendExtensions = reversedConcatArraysByPath('resolve.extensions');
+// setOutput :: Object -> Object
+const setOutput = setByPath('output');
 
 module.exports = {
   setEntry,
+  addEntry,
   addRule,
   addPlugin,
   addPlugins,
   appendExtensions,
-  prependExtensions
+  prependExtensions,
+  setOutput
 };

@@ -3,11 +3,11 @@ const R = require('ramda');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const {
-    setEntry,
     addRule,
     addPlugin,
     appendExtensions,
-    prependExtensions
+    prependExtensions,
+    addEntry
 } = require('./util/compose');
 const env = require('./util/env');
 
@@ -23,7 +23,7 @@ const config = {
     entry: {},
     output: {
         path: path.join(__dirname, '/build/resources/main/assets'),
-        filename: './js/[name].js',
+        filename: '[name].js',
     },
     resolve: {
         extensions: [],
@@ -60,11 +60,11 @@ function addTypeScriptSupport(cfg) {
         loader: 'ts-loader',
         options: {
             configFile: 'tsconfig.json',
-        },
+        }
     };
 
     return R.pipe(
-        setEntry('./js/main.js'),
+        addEntry('ts/bundle', './ts/main.ts'),
         addRule(rule),
         prependExtensions(['.tsx', '.ts', '.json'])
     )(cfg);
@@ -79,7 +79,7 @@ function addBabelSupport(cfg) {
     };
 
     return R.pipe(
-        setEntry('./js/main.js'),
+        addEntry('js/bundle', './js/main.js'),
         addRule(rule),
         prependExtensions(['.jsx', '.js', '.json'])
     )(cfg);
@@ -97,8 +97,8 @@ const createDefaultCssLoaders = () => ([
 
 const createCssPlugin = () => (
     new MiniCssExtractPlugin({
-        filename: './styles/[name].css',
-        chunkFilename: './styles/[id].css',
+        filename: './styles/bundle.css',
+        chunkFilename: '[id].css',
     })
 );
 
@@ -161,8 +161,8 @@ function addFontSupport(cfg) {
 // ----------------------------------------------------------------------------
 
 module.exports = R.pipe(
-    // addTypeScriptSupport,
     addBabelSupport,
+    addTypeScriptSupport,
     addLessSupport,
     addSassSupport,
     addFontSupport
