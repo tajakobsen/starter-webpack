@@ -3,11 +3,11 @@ const R = require('ramda');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const TerserPlugin = require('terser-webpack-plugin');
 const {
+    setEntry,
     addRule,
     addPlugin,
     appendExtensions,
-    prependExtensions,
-    addEntry
+    prependExtensions
 } = require('./util/compose');
 const env = require('./util/env');
 
@@ -64,7 +64,7 @@ function addTypeScriptSupport(cfg) {
     };
 
     return R.pipe(
-        addEntry('ts/bundle', './ts/main.ts'),
+        setEntry('ts/bundle', './ts/main.ts'),
         addRule(rule),
         prependExtensions(['.tsx', '.ts', '.json'])
     )(cfg);
@@ -79,7 +79,7 @@ function addBabelSupport(cfg) {
     };
 
     return R.pipe(
-        addEntry('js/bundle', './js/main.js'),
+        setEntry('js/bundle', './js/main.js'),
         addRule(rule),
         prependExtensions(['.jsx', '.js', '.json'])
     )(cfg);

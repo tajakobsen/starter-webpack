@@ -1,9 +1,13 @@
 const R = require('ramda');
 
+// recurry :: Function -> Function
+const recurry = R.pipe(R.uncurryN(2), R.curry);
+// splitPath :: String -> Array
+const splitPath = R.pipe(R.split('.'), R.filter(R.pipe(R.isEmpty, R.not)));
 // lensStringPath :: String -> Object
-const lensStringPath = R.pipe(R.split('.'), R.lensPath);
+const lensStringPath = R.pipe(splitPath, R.lensPath);
 // getByStringPath :: String -> Object
-const getByStringPath = R.pipe(R.split('.'), R.path);
+const getByStringPath = R.pipe(splitPath, R.path);
 // doArrayByPath :: Function -> String -> Object -> Object -> Object
 const doArrayByPath = arrayFn => R.curry((objPath, data, object) =>
   R.pipe(
@@ -17,17 +21,19 @@ const doArrayByPath = arrayFn => R.curry((objPath, data, object) =>
 const appendToArrayByPath = doArrayByPath(R.append);
 // concatArraysByPath :: String -> Array -> Object -> Object
 const concatArraysByPath = doArrayByPath(R.concat);
-// concatArraysByPath :: String -> Array -> Object -> Object
+// reversedConcatArraysByPath :: String -> Array -> Object -> Object
 const reversedConcatArraysByPath = doArrayByPath(data => R.concat(R.__, data));
 // setByPath :: String -> Object -> Object -> Object
 const setByPath = R.curry((objPath, data, object) =>
   R.set(lensStringPath(objPath), data, object)
 );
 
-// setEntry :: Object -> Object
-const setEntry = setByPath('entry.bundle');
-// addEntry :: Object -> Object -> Object
-const addEntry = (bundleName, data) => setByPath('entry.' + bundleName, data);
+// setOutput :: Object -> Object -> Object
+const setOutput = setByPath('output');
+// setBundleEntry :: Object -> Object -> Object
+const setBundleEntry = setByPath('entry.bundle');
+// setEntry :: String -> Object -> Object -> Object
+const setEntry = recurry(bundleName => setByPath(`entry.${bundleName}`));
 // addRule :: Object -> Object -> Object
 const addRule = appendToArrayByPath('module.rules');
 // addPlugin :: Object -> Object -> Object
@@ -38,16 +44,14 @@ const addPlugins = list => R.map(addPlugin, list);
 const prependExtensions = concatArraysByPath('resolve.extensions');
 // appendExtensions :: Object -> Object
 const appendExtensions = reversedConcatArraysByPath('resolve.extensions');
-// setOutput :: Object -> Object
-const setOutput = setByPath('output');
 
 module.exports = {
+  setOutput,
+  setBundleEntry,
   setEntry,
-  addEntry,
   addRule,
   addPlugin,
   addPlugins,
   appendExtensions,
-  prependExtensions,
-  setOutput
+  prependExtensions
 };
