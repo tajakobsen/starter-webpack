@@ -1,3 +1,4 @@
 export default function example() {
-  console.log('Webpack starter.');
+  const msg = 'Webpack starter.';
+  console.log(msg);
 }
