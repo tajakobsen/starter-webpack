@@ -36,7 +36,7 @@ repositories {
 
 node {
     download = true
-    version '10.15.3'
+    version '10.16.0'
 }
 
 task npmInstallForce( type: NpmTask ) {
@@ -61,15 +61,18 @@ processResources {
     include '**/*'
     exclude '**/.gitkeep'
     exclude 'assets/js/**/*.js'
+    exclude 'assets/ts/**/*.ts'
     include 'assets/js/bundle.js'
+    exclude 'assets/styles/**/*.less'
     exclude 'assets/styles/**/*.sass'
-    exclude 'assets/styles/**/*.sass'
+    exclude 'assets/styles/**/*.scss'
     includeEmptyDirs false
 }
 
 jar {
     exclude 'assets/styles/**/*.less'
     exclude 'assets/styles/**/*.sass'
+    exclude 'assets/styles/**/*.scss'
     exclude 'assets/styles/**/*.js'
 
     dependsOn += webpack
