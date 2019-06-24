@@ -81,7 +81,6 @@ function addTypeScriptSupport(cfg) {
   const entries = listEntries('ts', [
     // Add additional files to the ignore list.
     // The following path will be transformed to 'src/main/resources/lib/observe/observe.ts:
-    'lib/observe/observe.ts',
     'types.ts'
   ]);
   
@@ -133,6 +132,6 @@ function addBabelSupport(cfg) {
 // ----------------------------------------------------------------------------
 
 module.exports = R.pipe(
-  addBabelSupport
-  // addTypeScriptSupport
+  addBabelSupport,
+  addTypeScriptSupport
 )(config);

@@ -5,6 +5,7 @@ const logEvent = (event) => {
 };
 
 export function init() {
+  log.info('Hello from transpiled ES6 server-side code.');
   try {
     listener({
       type: 'node.*',
