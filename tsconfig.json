@@ -1,13 +1,14 @@
 {
   "compilerOptions": {
-    "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "commonjs",
     "target": "es5",
-    "jsx": "react",
-    "allowJs": true
+    "sourceMap": true,
+    "allowJs": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true
   },
-  "include": [
-    "src/**/*"
+  "types": [
+    "types"
   ]
 }

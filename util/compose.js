@@ -1,3 +1,4 @@
+const path = require('path');
 const R = require('ramda');
 
 // recurry :: Function -> Function
@@ -16,6 +17,11 @@ const doArrayByPath = arrayFn => R.curry((objPath, data, object) =>
     R.set(lensStringPath(objPath), R.__, object)
   )(object)
 );
+// pathWithoutExt :: String -> String
+function pathWithoutExt(filePath) {
+  const { dir, name } = path.parse(filePath);
+  return `${dir}${dir.length > 0 ? path.sep : ''}${name}`.replace('\\\\', '/');
+}
 
 // appendToArrayByPath :: String -> Object -> Object -> Object
 const appendToArrayByPath = doArrayByPath(R.append);
@@ -34,6 +40,10 @@ const setOutput = setByPath('output');
 const setBundleEntry = setByPath('entry.bundle');
 // setEntry :: String -> Object -> Object -> Object
 const setEntry = recurry(bundleName => setByPath(`entry.${bundleName}`));
+// setEntryForPath :: String -> Object -> Object
+const setEntryForPath = recurry(entryPath => setByPath(`entry.${pathWithoutExt(entryPath)}`, `./${entryPath}`));
+// setEntriesForPath :: Array -> Object -> Object
+const setEntriesForPath = R.curry((entries, config) => R.reduce((cfg, entry) => setEntryForPath(entry, cfg), config, entries));
 // addRule :: Object -> Object -> Object
 const addRule = appendToArrayByPath('module.rules');
 // addPlugin :: Object -> Object -> Object
@@ -49,6 +59,8 @@ module.exports = {
   setOutput,
   setBundleEntry,
   setEntry,
+  setEntryForPath,
+  setEntriesForPath,
   addRule,
   addPlugin,
   addPlugins,
