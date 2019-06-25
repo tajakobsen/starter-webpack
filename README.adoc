@@ -27,7 +27,8 @@ The project will support:
 * Code minification;
 * Production and development environments;
 * SASS and Less support;
-* Transpilation with Babel.
+* Transpilation of ECMAScript code with Babel (client- and server-side);
+* Transpilation of TypeScript code (client- and server-side).
 
 == Create a project
 

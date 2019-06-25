@@ -92,9 +92,9 @@ function addBabelSupport(cfg) {
   };
 
   return R.pipe(
-    setEntry('js/bundle', './js/main.js'),
+    setEntry('js/bundle', './js/main.es6'),
     addRule(rule),
-    prependExtensions(['.jsx', '.js', '.json'])
+    prependExtensions(['es6', '.jsx', '.js', '.json'])
   )(cfg);
 }
 
