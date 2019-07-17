@@ -5,8 +5,7 @@ const isProd = env.prod;
 const plugins = Object.assign(
     {
         "postcss-normalize": {},
-        autoprefixer: {},
-        "css-mqpacker": {}
+        autoprefixer: {}
     },
     isProd ? {cssnano: {}} : {}
 );
