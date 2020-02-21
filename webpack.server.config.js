@@ -45,9 +45,6 @@ const config = {
       context: path.resolve(__dirname, 'node_modules')
     })
   ],
-  externals: [
-    /\/lib\/(enonic|xp)\/.+/
-  ],
   mode: env.type,
   // Source maps are not usable in server scripts
   devtool: false,
