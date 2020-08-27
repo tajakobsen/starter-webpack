@@ -2,7 +2,6 @@ const path = require('path');
 const glob = require('glob');
 const R = require('ramda');
 const TerserPlugin = require('terser-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const {
   setEntriesForPath,
   addRule,
@@ -38,13 +37,6 @@ const config = {
       minSize: 30000,
     },
   },
-  plugins: [
-    new CopyWebpackPlugin([
-        // { from: 'babel-standalone/', to: 'assets/babel-standalone/' },
-      ], {
-      context: path.resolve(__dirname, 'node_modules')
-    })
-  ],
   mode: env.type,
   // Source maps are not usable in server scripts
   devtool: false,
@@ -80,7 +72,7 @@ function addTypeScriptSupport(cfg) {
     // The following path will be transformed to 'src/main/resources/types.ts:
     'types.ts'
   ]);
-  
+
   return R.pipe(
     setEntriesForPath(entries),
     addRule(rule),
@@ -99,7 +91,7 @@ function addBabelSupport(cfg) {
       plugins: [],
       presets: [
         [
-          '@babel/preset-env', 
+          '@babel/preset-env',
           {
             // Use custom Browserslist config
             targets: 'node 0.10',
