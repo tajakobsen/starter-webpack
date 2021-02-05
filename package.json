@@ -1,7 +1,7 @@
 {
   "name": "starter-webpack",
-  "version": "1.3.2",
-  "description": "Webpack starter for Enonic XP",
+  "version": "1.0.0",
+  "description": "My Enonic XP project",
   "license": "Apache-2.0",
   "private": true,
   "scripts": {

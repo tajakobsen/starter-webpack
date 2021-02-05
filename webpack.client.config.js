@@ -30,7 +30,6 @@ const config = {
   optimization: {
     minimizer: [
       new TerserPlugin({
-        sourceMap: true,
         terserOptions: {
           compress: {
             drop_console: false,

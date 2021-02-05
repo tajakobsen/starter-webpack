@@ -9,6 +9,8 @@ NOTE: See the official https://developer.enonic.com/start/starter-webpack[docume
 [width="50%",options="header"]
 |===
 | Version | Min XP version
+|1.4.x
+|7.6.0
 |1.3.x
 |7.3.1
 |1.2.0
